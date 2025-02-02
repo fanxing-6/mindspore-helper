@@ -103,16 +103,10 @@
   // Configure tool-specific properties.
   "customizations": {
     "codespaces": {
-      "openFiles": [
-        "README.md",
-        ".devcontainer/README.md"
-      ]
+      "openFiles": ["README.md", ".devcontainer/README.md"]
     },
     "vscode": {
-      "openFiles": [
-        "README.md",
-        ".devcontainer/README.md"
-      ],
+      "openFiles": ["README.md", ".devcontainer/README.md"],
       "extensions": [
         "bierner.github-markdown-preview",
         "bradlc.vscode-tailwindcss",
@@ -205,7 +199,7 @@
         }
       }
     }
-  }
+  },
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
+  "remoteUser": "root"
 }
