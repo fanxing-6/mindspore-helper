@@ -68,19 +68,19 @@ const TRANSLATIONS = {
 
   welcomeMessage: {
     part1:
-      "欢迎使用 AnythingLLM，这是由 Mintplex Labs 开发的开源 AI 工具，可以将任何东西转换为您可以查询和聊天的训练有素的聊天机器人。AnythingLLM 是一款 BYOK（自带密钥）软件，因此除了您想使用的服务外，此软件不收取订阅费、费用或其他费用。",
+      "欢迎使用 MindSpore Helper，这是由华为开发的开源 AI 开发辅助工具，可以帮助开发者更高效地使用 MindSpore 进行 AI 模型开发。MindSpore Helper 提供了模型管理、数据集处理、开发环境配置等一站式 AI 开发辅助功能。",
     part2:
-      "AnythingLLM 是将强大的 AI 产品（如 OpenAi、GPT-4、LangChain、PineconeDB、ChromaDB 等）整合在一个整洁的包中而无需繁琐操作的最简单方法，可以将您的生产力提高 100 倍。",
+      "MindSpore Helper 是将强大的 AI 开发工具（如 MindSpore、ModelArts、Ascend 等）整合在一个整洁的包中而无需繁琐操作的最简单方法，可以将您的开发效率提高 100 倍。",
     part3:
-      "AnythingLLM 可以完全在您的本地计算机上运行，几乎没有开销，您甚至不会注意到它的存在！无需 GPU。也可以进行云端和本地安装。\nAI 工具生态系统每天都在变得更强大。AnythingLLM 使其易于使用。",
+      "MindSpore Helper 可以完全在您的本地计算机上运行，几乎没有开销，您甚至不会注意到它的存在！无需 GPU。也可以进行云端和本地安装。\nAI 开发工具生态系统每天都在变得更强大。MindSpore Helper 使其易于使用。",
     githubIssue: "在 Github 上创建问题",
     user1: "我该如何开始?!",
     part4:
-      "很简单。所有集合都组织成我们称之为“工作区”的桶。工作区是文件、文档、图像、PDF 和其他文件的存储桶，这些文件将被转换为 LLM 可以理解和在对话中使用的内容。\n\n您可以随时添加和删除文件。",
+      "很简单。所有项目都组织成我们称之为“工作区”的容器。工作区是模型、数据集、配置文件和其他开发资源的存储空间，这些资源将被转换为 MindSpore 可以理解和使用的格式。\n\n您可以随时添加和删除资源。",
     createWorkspace: "创建您的第一个工作区",
     user2: "这像是一个 AI Dropbox 吗？那么聊天呢？它是一个聊天机器人，不是吗？",
     part5:
-      "AnythingLLM 不仅仅是一个更智能的 Dropbox。\n\nAnythingLLM 提供了两种与您的数据交流的方式：\n\n<i>查询：</i> 您的聊天将返回在您的工作区中访问的文档中找到的数据或推论。向工作区添加更多文档会使其更智能！\n\n<i>对话：</i> 您的文档和正在进行的聊天记录同时为 LLM 知识做出贡献。非常适合添加基于文本的实时信息或纠正 LLM 可能存在的误解。\n\n您可以在聊天过程中 <i>切换模式！</i>",
+      "MindSpore Helper 不仅仅是一个开发工具。\n\nMindSpore Helper 提供了两种与您的开发资源交互的方式：\n\n<i>查询：</i> 您的查询将返回在工作区中访问的开发资源中找到的数据或推论。向工作区添加更多资源会使其更智能！\n\n<i>调试：</i> 您的开发资源和正在进行的调试记录同时为模型训练提供支持。非常适合添加基于数据的实时信息或纠正模型可能存在的错误。\n\n您可以在开发过程中 <i>切换模式！</i>",
     user3: "哇，这听起来很棒，让我马上试试！",
     part6: "玩得开心！",
     starOnGithub: "在 GitHub 上加星",
@@ -186,8 +186,8 @@ const TRANSLATIONS = {
       title: "LLM 温度",
       "desc-start": "此设置控制您的 LLM 回答的“创意”程度",
       "desc-end":
-        "数字越高越有创意。对于某些模型，如果设置得太高，可能会导致响应不一致。",
-      hint: "大多数 LLM 都有各种可接受的有效值范围。请咨询您的LLM提供商以获取该信息。",
+        "数字越高越有创意。对于某些模型，如果设置得太高，可能会导致输出不一致。",
+      hint: "大多数模型都有各种可接受的有效值范围。请咨询您的模型提供商以获取该信息。",
     },
   },
 
@@ -331,10 +331,10 @@ const TRANSLATIONS = {
 
   // LLM Preferences
   llm: {
-    title: "LLM 首选项",
+    title: "LLM 模型首选项",
     description:
-      "这些是您首选的 LLM 聊天和嵌入提供商的凭据和设置。重要的是，这些密钥是最新的和正确的，否则 AnythingLLM 将无法正常运行。",
-    provider: "LLM 提供商",
+      "这些是您首选的 LLM 聊天模型和嵌入提供商的凭据和设置。重要的是，这些密钥是最新的和正确的，否则 MindSpore Helper 将无法正常运行。",
+    provider: "模型提供商",
   },
 
   transcription: {

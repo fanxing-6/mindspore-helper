@@ -66,7 +66,7 @@ export default function Footer() {
               />
             </Link>
           </div>
-          <div className="flex w-fit">
+          {/* <div className="flex w-fit">
             <Link
               to={paths.docs()}
               target="_blank"
@@ -99,7 +99,7 @@ export default function Footer() {
                 color="var(--theme-sidebar-footer-icon-fill)"
               />
             </Link>
-          </div>
+          </div> */}
           {!isMobile && <SettingsButton />}
         </div>
         <Tooltip
