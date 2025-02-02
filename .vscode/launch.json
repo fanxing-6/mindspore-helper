@@ -39,7 +39,6 @@
       },
       "runtimeExecutable": "${workspaceFolder}/frontend/node_modules/.bin/vite",
       "runtimeArgs": ["--debug", "--host=0.0.0.0"],
-      // "runtimeExecutable": "yarn",
       "skipFiles": ["<node_internals>/**"],
       "type": "node",
       "sourceMaps": true

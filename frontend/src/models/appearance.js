@@ -7,12 +7,12 @@ const Appearance = {
    * @returns {{showScrollbar: boolean}}
    */
   getSettings: () => {
-    try {
-      const settings = localStorage.getItem(APPEARANCE_SETTINGS);
-      return settings ? JSON.parse(settings) : Appearance.defaultSettings;
-    } catch (e) {
-      return Appearance.defaultSettings;
-    }
+    // try {
+    //   const settings = localStorage.getItem(APPEARANCE_SETTINGS);
+    //   return settings ? JSON.parse(settings) : Appearance.defaultSettings;
+    // } catch (e) {
+    return Appearance.defaultSettings;
+    // }
   },
 
   /**

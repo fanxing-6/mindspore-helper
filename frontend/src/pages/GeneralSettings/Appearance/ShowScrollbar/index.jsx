@@ -7,6 +7,7 @@ export default function ShowScrollbar() {
 
   const handleChange = async (e) => {
     const newValue = e.target.checked;
+
     setShowScrollbar(newValue);
     setSaving(true);
     try {
@@ -27,7 +28,7 @@ export default function ShowScrollbar() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full gap-y-4 mt-6">
+    <div className="flex flex-col w-full gap-y-4 mt-6 hidden">
       <div className="flex flex-col gap-y-1">
         <h2 className="text-base leading-6 font-bold text-white">
           Show chat window scrollbar

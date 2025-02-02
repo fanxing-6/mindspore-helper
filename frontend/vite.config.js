@@ -10,12 +10,12 @@ dns.setDefaultResultOrder("verbatim")
 // https://vitejs.dev/config/
 export default defineConfig({
   assetsInclude: [
-    './public/piper/ort-wasm-simd-threaded.wasm',
-    './public/piper/piper_phonemize.wasm',
-    './public/piper/piper_phonemize.data',
+    "./public/piper/ort-wasm-simd-threaded.wasm",
+    "./public/piper/piper_phonemize.wasm",
+    "./public/piper/piper_phonemize.data"
   ],
   worker: {
-    format: 'es'
+    format: "es"
   },
   server: {
     port: 3000,
@@ -56,19 +56,20 @@ export default defineConfig({
     ]
   },
   build: {
+    sourcemap: true,
     rollupOptions: {
       output: {
         // These settings ensure the primary JS and CSS file references are always index.{js,css}
         // so we can SSR the index.html as text response from server/index.js without breaking references each build.
-        entryFileNames: 'index.js',
+        entryFileNames: "index.js",
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'index.css') return `index.css`;
-          return assetInfo.name;
-        },
+          if (assetInfo.name === "index.css") return `index.css`
+          return assetInfo.name
+        }
       },
       external: [
         // Reduces transformation time by 50% and we don't even use this variant, so we can ignore.
-        /@phosphor-icons\/react\/dist\/ssr/,
+        /@phosphor-icons\/react\/dist\/ssr/
       ]
     },
     commonjsOptions: {

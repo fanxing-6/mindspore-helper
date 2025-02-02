@@ -36,11 +36,11 @@ export default function Appearance() {
           <LanguagePreference />
           <ShowScrollbar />
           <CustomLogo />
-          <CustomAppName />
-          <CustomMessages />
-          <FooterCustomization />
-          <SupportEmail />
-          <CustomSiteSettings />
+          {/* <CustomAppName /> */}
+          {/* <CustomMessages /> */}
+          {/* <FooterCustomization /> */}
+          {/* <SupportEmail /> */}
+          {/* <CustomSiteSettings /> */}
         </div>
       </div>
     </div>
