@@ -6,7 +6,7 @@ import Workspace from "@/models/workspace";
 import PasswordModal, { usePasswordModal } from "@/components/Modals/Password";
 import { isMobile } from "react-device-detect";
 import { FullScreenLoader } from "@/components/Preloader";
-
+import ChatSettingsSidebar from "@/components/WorkspaceChat/ChatSettingsSidebar";
 export default function WorkspaceChat() {
   const { loading, requiresAuth, mode } = usePasswordModal();
 
@@ -48,6 +48,7 @@ function ShowWorkspaceChat() {
       <div className="w-screen h-screen overflow-hidden bg-theme-bg-container flex">
         {!isMobile && <Sidebar />}
         <WorkspaceChatContainer loading={loading} workspace={workspace} />
+        {!isMobile && <ChatSettingsSidebar />}
       </div>
     </>
   );
