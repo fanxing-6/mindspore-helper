@@ -20,6 +20,8 @@ const UserIcon = memo(({ role }) => {
   );
 });
 
+UserIcon.displayName = "UserIcon";
+
 function RenderUserPfp({ pfp }) {
   if (!pfp)
     return (
