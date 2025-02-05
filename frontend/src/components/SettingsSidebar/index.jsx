@@ -255,7 +255,7 @@ const SidebarOptions = ({ user = null, t }) => (
             // },
           ]}
         />
-        <Option
+        {/* <Option
           btnText={t("settings.admin")}
           icon={<UserCircleGear className="h-5 w-5 flex-shrink-0" />}
           user={user}
@@ -283,7 +283,7 @@ const SidebarOptions = ({ user = null, t }) => (
               roles: ["admin", "manager"],
             },
           ]}
-        />
+        /> */}
         <Option
           btnText={t("settings.agent-skills")}
           icon={<Robot className="h-5 w-5 flex-shrink-0" />}
@@ -300,7 +300,7 @@ const SidebarOptions = ({ user = null, t }) => (
           flex={true}
           roles={["admin", "manager"]}
         />
-        <Option
+        {/* <Option
           btnText={t("settings.tools")}
           icon={<Toolbox className="h-5 w-5 flex-shrink-0" />}
           user={user}
@@ -312,33 +312,33 @@ const SidebarOptions = ({ user = null, t }) => (
               flex: true,
               roles: ["admin"],
             },
-            {
-              btnText: t("settings.embeds"),
-              href: paths.settings.embedSetup(),
-              flex: true,
-              roles: ["admin"],
-            },
+            // {
+            //   btnText: t("settings.embeds"),
+            //   href: paths.settings.embedSetup(),
+            //   flex: true,
+            //   roles: ["admin"],
+            // },
             {
               btnText: t("settings.event-logs"),
               href: paths.settings.logs(),
               flex: true,
               roles: ["admin"],
             },
-            {
-              btnText: t("settings.api-keys"),
-              href: paths.settings.apiKeys(),
-              flex: true,
-              roles: ["admin"],
-            },
-            {
-              btnText: t("settings.browser-extension"),
-              href: paths.settings.browserExtension(),
-              flex: true,
-              roles: ["admin", "manager"],
-            },
+            // {
+            //   btnText: t("settings.api-keys"),
+            //   href: paths.settings.apiKeys(),
+            //   flex: true,
+            //   roles: ["admin"],
+            // },
+            // {
+            //   btnText: t("settings.browser-extension"),
+            //   href: paths.settings.browserExtension(),
+            //   flex: true,
+            //   roles: ["admin", "manager"],
+            // },
           ]}
-        />
-        <Option
+        /> */}
+        {/* <Option
           btnText={t("settings.security")}
           icon={<Nut className="h-5 w-5 flex-shrink-0" />}
           href={paths.settings.security()}
@@ -346,7 +346,7 @@ const SidebarOptions = ({ user = null, t }) => (
           flex={true}
           roles={["admin", "manager"]}
           hidden={user?.role}
-        />
+        /> */}
         <HoldToReveal key="exp_features">
           <Option
             btnText={t("settings.experimental-features")}
