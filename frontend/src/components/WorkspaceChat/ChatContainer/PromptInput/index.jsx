@@ -315,9 +315,9 @@ export default function PromptInput({
                 />
                 <TextSizeButton />
               </div>
-              <div className="flex gap-x-2">
+              {/* <div className="flex gap-x-2">
                 <SpeechToText sendCommand={sendCommand} />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

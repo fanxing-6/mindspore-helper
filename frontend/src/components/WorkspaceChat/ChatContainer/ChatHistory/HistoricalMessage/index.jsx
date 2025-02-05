@@ -82,7 +82,7 @@ const HistoricalMessage = ({
         <div className="flex gap-x-5">
           <div className="flex flex-col items-center">
             <ProfileImage role={role} workspace={workspace} />
-            <div className="mt-1 -mb-10">
+            {/* <div className="mt-1 -mb-10">
               {role === "assistant" && (
                 <TTSMessage
                   slug={workspace?.slug}
@@ -90,7 +90,7 @@ const HistoricalMessage = ({
                   message={message}
                 />
               )}
-            </div>
+            </div> */}
           </div>
           {isEditing ? (
             <EditMessageForm
