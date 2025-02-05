@@ -16,6 +16,7 @@ import {
   THOUGHT_REGEX_OPEN,
   ThoughtChainComponent,
 } from "../ThoughtContainer";
+import mindsporeAvatar from "@/media/logo/anything-llm-icon.png";
 
 const DOMPurify = createDOMPurify(window);
 const HistoricalMessage = ({
@@ -137,7 +138,8 @@ function ProfileImage({ role, workspace }) {
     return (
       <div className="relative w-[35px] h-[35px] rounded-full flex-shrink-0 overflow-hidden">
         <img
-          src={workspace.pfpUrl}
+          // src={workspace.pfpUrl}
+          src={mindsporeAvatar}
           alt="Workspace profile picture"
           className="absolute top-0 left-0 w-full h-full object-cover rounded-full bg-white"
         />
@@ -243,3 +245,4 @@ const RenderChatContent = memo(
     );
   }
 );
+RenderChatContent.displayName = "RenderChatContent";
