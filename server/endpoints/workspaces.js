@@ -34,11 +34,14 @@ const { getTTSProvider } = require("../utils/TextToSpeech");
 const { WorkspaceThread } = require("../models/workspaceThread");
 const truncate = require("truncate");
 const { purgeDocument } = require("../utils/files/purgeDocument");
+const prisma = require("../utils/prisma");
+const { log } = require("console");
 
 function workspaceEndpoints(app) {
   if (!app) return;
-
   const responseCache = new Map();
+
+
 
   app.post(
     "/workspace/new",
@@ -52,6 +55,31 @@ function workspaceEndpoints(app) {
         const { name = null, onboardingComplete = false } = reqBody(request);
         const { workspace, message } = await Workspace.new(name, user?.id);
         await Workspace.updateUsers(workspace.id, [user?.id]);
+
+        // 查找任意一个已存在的workspace的documents
+        const existingWorkspace = await Workspace.where(
+          {
+            id: { not: workspace.id }, // 排除刚创建的workspace
+          },
+          1
+        ); // 只获取一个workspace即可
+
+        if (existingWorkspace && existingWorkspace.length > 0) {
+          const docs = await Document.where({
+            workspaceId: existingWorkspace[0].id,
+          });
+          if (docs.length > 0) {
+            const docPaths = docs.map((doc) => doc.docpath);
+            const { failedToEmbed = [], errors = [] } =
+              await Document.addDocuments(workspace, docPaths, user?.id);
+
+            if (failedToEmbed.length > 0) {
+              console.warn(
+                `同步文档时失败: ${failedToEmbed.length} 个文档未能同步。\n错误: ${errors.join("\n")}`
+              );
+            }
+          }
+        }
 
         await Telemetry.sendTelemetry(
           "workspace_created",
@@ -72,6 +100,7 @@ function workspaceEndpoints(app) {
           },
           user?.id
         );
+
         if (onboardingComplete === true)
           await Telemetry.sendTelemetry("onboarding_complete");
 
@@ -82,6 +111,48 @@ function workspaceEndpoints(app) {
       }
     }
   );
+  // app.post(
+  //   "/workspace/new",
+  //   [
+  //     validatedRequest,
+  //     flexUserRoleValid([ROLES.default, ROLES.admin, ROLES.manager]),
+  //   ],
+  //   async (request, response) => {
+  //     try {
+  //       const user = await userFromSession(request, response);
+  //       const { name = null, onboardingComplete = false } = reqBody(request);
+  //       const { workspace, message } = await Workspace.new(name, user?.id);
+  //       await Workspace.updateUsers(workspace.id, [user?.id]);
+
+  //       await Telemetry.sendTelemetry(
+  //         "workspace_created",
+  //         {
+  //           multiUserMode: multiUserMode(response),
+  //           LLMSelection: process.env.LLM_PROVIDER || "openai",
+  //           Embedder: process.env.EMBEDDING_ENGINE || "inherit",
+  //           VectorDbSelection: process.env.VECTOR_DB || "lancedb",
+  //           TTSSelection: process.env.TTS_PROVIDER || "native",
+  //         },
+  //         user?.id
+  //       );
+
+  //       await EventLogs.logEvent(
+  //         "workspace_created",
+  //         {
+  //           workspaceName: workspace?.name || "Unknown Workspace",
+  //         },
+  //         user?.id
+  //       );
+  //       if (onboardingComplete === true)
+  //         await Telemetry.sendTelemetry("onboarding_complete");
+
+  //       response.status(200).json({ workspace, message });
+  //     } catch (e) {
+  //       console.error(e.message, e);
+  //       response.sendStatus(500).end();
+  //     }
+  //   }
+  // );
 
   app.post(
     "/workspace/:slug/update",
@@ -228,6 +299,29 @@ function workspaceEndpoints(app) {
         const user = await userFromSession(request, response);
         const { slug = null } = request.params;
         const { adds = [], deletes = [] } = reqBody(request);
+        const syncToAll = true;
+        // 是否同步到所有工作区
+        if (syncToAll) {
+          const syncResults = await syncAllWorkspaces(
+            adds,
+            deletes,
+            response.locals?.user?.id
+          );
+          return response.status(200).json({
+            success: syncResults.failures.length === 0,
+            results: {
+              successfulWorkspaces: syncResults.successes,
+              failedWorkspaces: syncResults.failures,
+              errors: Array.from(syncResults.errors),
+            },
+            message:
+              syncResults.failures.length > 0
+                ? `同步失败的工作区: ${syncResults.failures.length}个。详细错误信息请查看结果。`
+                : "所有工作区同步成功",
+          });
+        }
+        //++++++++++++++++++++++
+        // 同步到单个工作区
         const currWorkspace = multiUserMode(response)
           ? await Workspace.getWithUser(user, { slug })
           : await Workspace.get({ slug });
@@ -263,6 +357,47 @@ function workspaceEndpoints(app) {
       }
     }
   );
+
+  async function syncAllWorkspaces(adds = [], deletes = [], userId = null) {
+    const allWorkspaces = await Workspace.where({});
+    const syncResults = {
+      successes: [],
+      failures: [],
+      errors: new Set(),
+    };
+
+    await prisma.$transaction(async (tx) => {
+      for (const workspace of allWorkspaces) {
+        try {
+          if (deletes.length > 0) {
+            await Document.removeDocuments(workspace, deletes, userId);
+          }
+          if (adds.length > 0) {
+            const { failedToEmbed = [], errors = [] } =
+              await Document.addDocuments(workspace, adds, userId);
+
+            if (failedToEmbed.length > 0) {
+              syncResults.failures.push({
+                workspace: workspace.name,
+                failedDocs: failedToEmbed,
+              });
+              errors.forEach((e) => syncResults.errors.add(e));
+            } else {
+              syncResults.successes.push(workspace.name);
+            }
+          }
+        } catch (error) {
+          syncResults.failures.push({
+            workspace: workspace.name,
+            error: error.message,
+          });
+          syncResults.errors.add(error.message);
+        }
+      }
+    });
+
+    return syncResults;
+  }
 
   app.delete(
     "/workspace/:slug",
