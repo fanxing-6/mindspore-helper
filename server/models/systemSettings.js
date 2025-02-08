@@ -335,7 +335,7 @@ const SystemSettings = {
       const updatePromises = [];
       for (const key of Object.keys(updates)) {
         let validatedValue = updates[key];
-        if (this.validations.hasOwnProperty(key)) {
+        if (key in this.validations) {
           if (this.validations[key].constructor.name === "AsyncFunction") {
             validatedValue = await this.validations[key](updates[key]);
           } else {

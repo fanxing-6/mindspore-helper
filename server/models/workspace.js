@@ -13,7 +13,7 @@ function isNullOrNaN(value) {
 
 const Workspace = {
   defaultPrompt:
-    "Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. Return only your response to the question given the above information following the users instructions as needed.",
+    "给定以下对话、相关上下文和后续问题，请根据上述信息回答用户当前提出的问题。仅返回你对问题的回答，并根据需要遵循用户的指示。",
 
   // Used for generic updates so we can validate keys in request body
   // commented fields are not writable, but are available on the db object

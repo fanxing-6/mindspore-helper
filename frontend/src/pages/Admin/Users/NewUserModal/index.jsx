@@ -33,7 +33,7 @@ export default function NewUserModal({ closeModal }) {
         <div className="relative p-6 border-b rounded-t border-theme-modal-border">
           <div className="w-full flex gap-x-2 items-center">
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Add user to instance
+              添加用户
             </h3>
           </div>
           <button
@@ -52,27 +52,26 @@ export default function NewUserModal({ closeModal }) {
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-white"
                 >
-                  Username
+                  用户名
                 </label>
                 <input
                   name="username"
                   type="text"
                   className="border-none bg-theme-settings-input-bg w-full text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="User's username"
+                  placeholder="用户名"
                   minLength={2}
                   required={true}
                   autoComplete="off"
                   pattern="^[a-z0-9_-]+$"
                   onInvalid={(e) =>
                     e.target.setCustomValidity(
-                      "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces"
+                      "用户名必须只包含小写字母、数字、下划线和连字符，且不能包含空格"
                     )
                   }
                   onChange={(e) => e.target.setCustomValidity("")}
                 />
                 <p className="mt-2 text-xs text-white/60">
-                  Username must only contain lowercase letters, numbers,
-                  underscores, and hyphens with no spaces
+                  用户名必须只包含小写字母、数字、下划线和连字符，且不能包含空格
                 </p>
               </div>
               <div>
@@ -80,19 +79,19 @@ export default function NewUserModal({ closeModal }) {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-white"
                 >
-                  Password
+                  密码
                 </label>
                 <input
                   name="password"
                   type="text"
                   className="border-none bg-theme-settings-input-bg w-full text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="User's initial password"
+                  placeholder="用户初始密码"
                   required={true}
                   autoComplete="off"
                   minLength={8}
                 />
                 <p className="mt-2 text-xs text-white/60">
-                  Password must be at least 8 characters long
+                  密码必须至少8个字符
                 </p>
               </div>
               <div>
@@ -100,7 +99,7 @@ export default function NewUserModal({ closeModal }) {
                   htmlFor="role"
                   className="block mb-2 text-sm font-medium text-white"
                 >
-                  Role
+                  角色
                 </label>
                 <select
                   name="role"
@@ -109,10 +108,10 @@ export default function NewUserModal({ closeModal }) {
                   onChange={(e) => setRole(e.target.value)}
                   className="border-none bg-theme-settings-input-bg w-full text-white placeholder:text-theme-settings-input-placeholder text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
                 >
-                  <option value="default">Default</option>
-                  <option value="manager">Manager</option>
+                  <option value="default">默认</option>
+                  <option value="manager">管理员</option>
                   {user?.role === "admin" && (
-                    <option value="admin">Administrator</option>
+                    <option value="admin">系统管理员</option>
                   )}
                 </select>
                 <RoleHintDisplay role={role} />
@@ -123,10 +122,9 @@ export default function NewUserModal({ closeModal }) {
                 limit={messageLimit.limit}
                 updateState={setMessageLimit}
               />
-              {error && <p className="text-red-400 text-sm">Error: {error}</p>}
+              {error && <p className="text-red-400 text-sm">错误: {error}</p>}
               <p className="text-white text-xs md:text-sm">
-                After creating a user they will need to login with their initial
-                login to get access.
+                创建用户后，他们需要使用初始登录凭据登录以获取访问权限。
               </p>
             </div>
             <div className="flex justify-between items-center mt-6 pt-6 border-t border-theme-modal-border">
@@ -135,13 +133,13 @@ export default function NewUserModal({ closeModal }) {
                 type="button"
                 className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
               >
-                Cancel
+                取消
               </button>
               <button
                 type="submit"
                 className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
               >
-                Add user
+                添加用户
               </button>
             </div>
           </form>

@@ -112,24 +112,24 @@ function UsersContainer() {
 
 const ROLE_HINT = {
   default: [
-    "Can only send chats with workspaces they are added to by admin or managers.",
-    "Cannot modify any settings at all.",
+    "只能发送与他们添加到工作区相关的聊天。",
+    "无法修改任何设置。",
   ],
   manager: [
-    "Can view, create, and delete any workspaces and modify workspace-specific settings.",
-    "Can create, update and invite new users to the instance.",
-    "Cannot modify LLM, vectorDB, embedding, or other connections.",
+    "可以查看、创建和删除任何工作区，并修改工作区特定的设置。",
+    "可以创建、更新和邀请新用户到实例。",
+    "无法修改LLM、向量数据库、嵌入或连接。",
   ],
   admin: [
-    "Highest user level privilege.",
-    "Can see and do everything across the system.",
+    "最高用户级别权限。",
+    "可以查看和执行系统中的所有操作。",
   ],
 };
 
 export function RoleHintDisplay({ role }) {
   return (
     <div className="flex flex-col gap-y-1 py-1 pb-4">
-      <p className="text-sm font-medium text-theme-text-primary">Permissions</p>
+      <p className="text-sm font-medium text-theme-text-primary">权限</p>
       <ul className="flex flex-col gap-y-1 list-disc px-4">
         {ROLE_HINT[role ?? "default"].map((hints, i) => {
           return (
@@ -150,7 +150,7 @@ export function MessageLimitInput({ enabled, limit, updateState, role }) {
       <div className="flex flex-col gap-y-1">
         <div className="flex items-center gap-x-2">
           <h2 className="text-base leading-6 font-bold text-white">
-            Limit messages per day
+            限制每天流量
           </h2>
           <label className="relative inline-flex cursor-pointer items-center">
             <input
@@ -168,14 +168,13 @@ export function MessageLimitInput({ enabled, limit, updateState, role }) {
           </label>
         </div>
         <p className="text-xs leading-[18px] font-base text-white/60">
-          Restrict this user to a number of successful queries or chats within a
-          24 hour window.
+          限制用户在24小时内成功查询或聊天的数量。
         </p>
       </div>
       {enabled && (
         <div className="mt-4">
           <label className="text-white text-sm font-semibold block mb-4">
-            Message limit per day
+            每天限制流量
           </label>
           <div className="relative mt-2">
             <input

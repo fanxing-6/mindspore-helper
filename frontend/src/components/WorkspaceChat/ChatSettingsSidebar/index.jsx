@@ -3,6 +3,7 @@ import { CaretRight } from "@phosphor-icons/react";
 import { useParams } from "react-router-dom";
 import showToast from "@/utils/toast";
 import Workspace from "@/models/workspace";
+import DeleteWorkspace from "@/pages/WorkspaceSettings/GeneralAppearance/DeleteWorkspace";
 import ChatHistorySettings from "@/pages/WorkspaceSettings/ChatSettings/ChatHistorySettings";
 import ChatPromptSettings from "@/pages/WorkspaceSettings/ChatSettings/ChatPromptSettings";
 import ChatTemperatureSettings from "@/pages/WorkspaceSettings/ChatSettings/ChatTemperatureSettings";
@@ -120,6 +121,7 @@ export default function ChatSettingsSidebar() {
                           {saving ? "更新中..." : "更新设置"}
                         </button>
                       )}
+                      <DeleteWorkspace workspace={activeWorkspace} />
                     </form>
                   </div>
                 </div>

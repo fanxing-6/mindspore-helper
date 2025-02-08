@@ -540,7 +540,9 @@ function systemEndpoints(app) {
         await SystemSettings._updateSettings({
           multi_user_mode: true,
         });
-        await BrowserExtensionApiKey.migrateApiKeysToMultiUser(user.id);
+
+        // 如果不需要浏览器扩展功能,可以注释掉下面这行
+        // await BrowserExtensionApiKey.migrateApiKeysToMultiUser(user.id);
 
         await updateENV(
           {

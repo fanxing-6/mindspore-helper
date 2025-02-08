@@ -42,12 +42,17 @@ function workspaceEndpoints(app) {
 
   app.post(
     "/workspace/new",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [
+      validatedRequest,
+      flexUserRoleValid([ROLES.default, ROLES.admin, ROLES.manager]),
+    ],
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
         const { name = null, onboardingComplete = false } = reqBody(request);
         const { workspace, message } = await Workspace.new(name, user?.id);
+        await Workspace.updateUsers(workspace.id, [user?.id]);
+
         await Telemetry.sendTelemetry(
           "workspace_created",
           {
@@ -80,7 +85,7 @@ function workspaceEndpoints(app) {
 
   app.post(
     "/workspace/:slug/update",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.all])],
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
@@ -94,7 +99,22 @@ function workspaceEndpoints(app) {
           response.sendStatus(400).end();
           return;
         }
-        await Workspace.trackChange(currWorkspace, data, user);
+        //  因为这里将权限修改为all，所以需要单独过滤data 中的键只允许chatMode openAiHistory openAiPrompt openAiTemp
+        let filteredData = data;
+        if (user?.role === ROLES.default) {
+          filteredData = Object.fromEntries(
+            Object.entries(data).filter(([key]) =>
+              [
+                "chatMode",
+                "openAiHistory",
+                "openAiPrompt",
+                "openAiTemp",
+              ].includes(key)
+            )
+          );
+        }
+
+        await Workspace.trackChange(currWorkspace, filteredData, user);
         const { workspace, message } = await Workspace.update(
           currWorkspace.id,
           data
@@ -246,7 +266,7 @@ function workspaceEndpoints(app) {
 
   app.delete(
     "/workspace/:slug",
-    [validatedRequest, flexUserRoleValid([ROLES.admin, ROLES.manager])],
+    [validatedRequest, flexUserRoleValid([ROLES.all])],
     async (request, response) => {
       try {
         const { slug = "" } = request.params;

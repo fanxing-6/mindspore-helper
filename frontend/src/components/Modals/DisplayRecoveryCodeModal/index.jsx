@@ -13,7 +13,7 @@ export default function RecoveryCodeModal({
 
   const downloadRecoveryCodes = () => {
     const blob = new Blob([recoveryCodes.join("\n")], { type: "text/plain" });
-    saveAs(blob, "recovery_codes.txt");
+    saveAs(blob, "恢复代码.txt");
     setDownloadClicked(true);
   };
 
@@ -39,7 +39,7 @@ export default function RecoveryCodeModal({
           <div className="w-full flex gap-x-2 items-center">
             <Key size={24} className="text-white" weight="bold" />
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Recovery Codes
+              恢复代码
             </h3>
           </div>
         </div>
@@ -49,10 +49,11 @@ export default function RecoveryCodeModal({
         >
           <div className="py-7 px-9 space-y-2 flex-col">
             <p className="text-sm text-white flex flex-col">
-              In order to reset your password in the future, you will need these
-              recovery codes. Download or copy your recovery codes to save them.{" "}
+              {/* In order to reset your password in the future, you will need these
+              recovery codes. Download or copy your recovery codes to save them.{" "} */}
+              为了将来重置你的密码，你需要这些恢复代码。下载或复制你的恢复代码保存它们。
               <br />
-              <b className="mt-4">These recovery codes are only shown once!</b>
+              <b className="mt-4">这些恢复代码只显示一次!</b>
             </p>
             <div
               className="border-none bg-theme-settings-input-bg text-white hover:text-primary-button
@@ -75,11 +76,11 @@ export default function RecoveryCodeModal({
               onClick={downloadClicked ? handleClose : downloadRecoveryCodes}
             >
               {downloadClicked ? (
-                "Close"
+                "关闭"
               ) : (
                 <>
                   <DownloadSimple weight="bold" size={18} />
-                  <p>Download</p>
+                  <p>下载</p>
                 </>
               )}
             </button>

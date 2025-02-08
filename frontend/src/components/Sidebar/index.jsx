@@ -60,7 +60,9 @@ export default function Sidebar() {
               <div className="relative h-[calc(100%-60px)] flex flex-col w-full justify-between pt-[10px] overflow-y-scroll no-scroll">
                 <div className="flex flex-col gap-y-2 pb-[60px] overflow-y-scroll no-scroll">
                   <div className="flex gap-x-2 items-center justify-between">
-                    {(!user || user?.role !== "default") && (
+                    {/* 所有用户都可以创建工作区 */}
+                    {/* {(!user || user?.role !== "default") &&  */}
+                    {true && (
                       <button
                         onClick={showNewWsModal}
                         className="light:bg-[#C2E7FE] light:hover:bg-[#7CD4FD] flex flex-grow w-[75%] h-[44px] gap-x-2 py-[5px] px-2.5 mb-2 bg-white rounded-[8px] text-sidebar justify-center items-center hover:bg-opacity-80 transition-all duration-300"

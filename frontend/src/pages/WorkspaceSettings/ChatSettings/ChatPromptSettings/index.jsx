@@ -17,7 +17,7 @@ export default function ChatPromptSettings({ workspace, setHasChanges }) {
         rows={5}
         defaultValue={chatPrompt(workspace)}
         className="border-none bg-theme-settings-input-bg placeholder:text-theme-settings-input-placeholder text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5 mt-2"
-        placeholder="Given the following conversation, relevant context, and a follow up question, reply with an answer to the current question the user is asking. Return only your response to the question given the above information following the users instructions as needed."
+        placeholder="根据以下对话内容、相关上下文和后续问题，请回答用户当前提出的问题。仅需根据上述信息返回对问题的响应，并按照用户指示进行操作。使用中文回答。"
         required={true}
         wrap="soft"
         autoComplete="off"
