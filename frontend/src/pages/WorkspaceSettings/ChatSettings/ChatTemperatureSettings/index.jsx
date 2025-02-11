@@ -19,16 +19,17 @@ export default function ChatTemperatureSettings({
     <div>
       <div className="flex flex-col">
         <label htmlFor="name" className="block input-label">
-          {t("chat.temperature.title")}
+          {/* {t("chat.temperature.title")} */}
+          LLM温度
         </label>
-        <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
+        {/* <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
           {t("chat.temperature.desc-start")}
           <br />
           {t("chat.temperature.desc-end")}
           <br />
           <br />
           <i>{t("chat.temperature.hint")}</i>
-        </p>
+        </p> */}
       </div>
       <input
         name="openAiTemp"

@@ -6,11 +6,12 @@ export default function ChatPromptSettings({ workspace, setHasChanges }) {
     <div>
       <div className="flex flex-col">
         <label htmlFor="name" className="block input-label">
-          {t("chat.prompt.title")}
+          {/* {t("chat.prompt.title")} */}
+          聊天提示词
         </label>
-        <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
+        {/* <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
           {t("chat.prompt.description")}
-        </p>
+        </p> */}
       </div>
       <textarea
         name="openAiPrompt"

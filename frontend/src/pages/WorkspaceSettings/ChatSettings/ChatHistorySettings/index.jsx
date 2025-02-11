@@ -5,13 +5,14 @@ export default function ChatHistorySettings({ workspace, setHasChanges }) {
     <div>
       <div className="flex flex-col gap-y-1 mb-4">
         <label htmlFor="name" className="block mb-2 input-label">
-          {t("chat.history.title")}
+          {/* {t("chat.history.title")} */}
+          历史记录条数
         </label>
-        <p className="text-white text-opacity-60 text-xs font-medium">
+        {/* <p className="text-white text-opacity-60 text-xs font-medium">
           {t("chat.history.desc-start")}
           <i> {t("chat.history.recommend")} </i>
           {t("chat.history.desc-end")}
-        </p>
+        </p> */}
       </div>
       <input
         name="openAiHistory"

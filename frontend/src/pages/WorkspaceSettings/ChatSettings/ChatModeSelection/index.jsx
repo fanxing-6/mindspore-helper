@@ -18,7 +18,7 @@ export default function ChatModeSelection({ workspace, setHasChanges }) {
             type="button"
             disabled={chatMode === "chat"}
             onClick={() => {
-              setChatMode("chat");
+              setChatMode("chat"); 
               setHasChanges(true);
             }}
             className="transition-bg duration-200 px-6 py-1 text-md text-white/60 disabled:text-white bg-transparent disabled:bg-[#687280] rounded-md"
