@@ -20,7 +20,7 @@
       "version": "latest"
     },
     // Terraform support
-    "ghcr.io/devcontainers/features/terraform:1": {},
+    // "ghcr.io/devcontainers/features/terraform:1": {},
     // Just a wrap to install needed packages
     "ghcr.io/devcontainers-contrib/features/apt-packages:1": {
       // Dependencies copied from ../docker/Dockerfile plus some dev stuff
@@ -76,6 +76,7 @@
       ]
     }
   },
+  "onCreateCommand": "sed -i 's@deb.debian.org@repo.huaweicloud.com@g' /etc/apt/sources.list && sed -i 's@security.debian.org@repo.huaweicloud.com@g' /etc/apt/sources.list && apt update",
   "updateContentCommand": "cd server && yarn && cd ../collector && PUPPETEER_DOWNLOAD_BASE_URL=https://storage.googleapis.com/chrome-for-testing-public yarn && cd ../frontend && yarn && cd .. && yarn setup:envs && yarn prisma:setup && echo \"Please run yarn dev:server, yarn dev:collector, and yarn dev:frontend in separate terminal tabs.\"",
   // Use 'postCreateCommand' to run commands after the container is created.
   // This configures VITE for github codespaces and installs gh cli
