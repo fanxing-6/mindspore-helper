@@ -51,10 +51,10 @@ export default function DefaultChatContainer() {
             <MessageText>
               {`
 欢迎使用 MindSpore 助手！我是您的AI向导，可以为您提供以下帮助：
-🎯 框架特性解析
-📚 学习路径指导
-💻 代码调试建议
-🚀 部署方案咨询
+🎯 全场景AI框架使用指导
+📚 动静统一编程体验
+💻 自动并行与分布式训练
+🚀 端-边-云统一部署方案
 您想了解哪些内容？可以通过下方按钮快速开始：
             `}
             </MessageText>
@@ -97,18 +97,18 @@ export default function DefaultChatContainer() {
             <MessageText>
               {`
 MindSpore 的核心功能包括：
-1. **全场景支持**
-    统一API支持端、边、云全场景部署
-    自动并行技术提升分布式训练效率
-2. **高效调试**
-    实时可视化训练过程
-    梯度/权重可视化分析工具
-3. **安全推理**
-    可信执行环境(TEE)支持
-    模型加密与权限管理
-4. **生态集成**
-    与昇腾芯片深度优化
-    支持ONNX格式模型转换
+1. **动静统一编程**
+    支持原生Python语法开发
+    自动微分与高阶函数支持
+2. **自动并行**
+    多维分布式训练策略
+    张量重排布技术优化
+3. **全场景部署**
+    端-边-云统一架构
+    支持CPU/GPU/NPU多种硬件
+4. **安全可信**
+    差分隐私保护
+    对抗性攻击防御
             `}
             </MessageText>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-4">
@@ -142,14 +142,19 @@ MindSpore 的核心功能包括：
           <div>
             <MessageText>
               {`
-很高兴您想开始学习！这里是推荐的学习路径：
+推荐的学习路径：
 1. **环境配置**
-首先需要配置好开发环境：Python 3.7+，选择合适的硬件平台（CPU/GPU/Ascend），按照官方安装指南进行安装。
-2. **入门教程**
-包含官方教程（系统性介绍基础知识和核心概念），示例项目（包含图像分类、目标检测等实际案例），以及 API 文档（详细的接口说明与使用示例）。
-3. **实践项目**
-建议从简单的示例开始，逐步尝试更复杂的应用，可以参考 ModelZoo 中的预训练模型。
-下面是一些重要的学习资源链接，建议您按需查看：
+    Python 3.7+环境
+    选择CPU/GPU/Ascend硬件平台
+2. **基础学习**
+    动静统一编程体验
+    自动微分与并行训练
+3. **进阶实践**
+    图算融合优化
+    安全可信技术应用
+4. **部署实践**
+    端-边-云统一部署
+    模型压缩与优化
             `}
             </MessageText>
             <div className="flex flex-col md:flex-row items-start md:items-center gap-1 md:gap-4">
@@ -183,14 +188,14 @@ MindSpore 的核心功能包括：
             <MessageText>
               {`
 MindSpore 生态系统包含：
-1. **开发工具链**
-   MindStudio：全流程开发工具
+1. **开发工具**
+   MindStudio：全流程开发环境
    MindInsight：可视化调试工具
 2. **模型资源**
-   ModelZoo：200+官方模型
+   ModelZoo：官方模型库
    Hub：社区贡献模型
 3. **部署方案**
-   MindSpore Lite：移动端推理
+   MindSpore Lite：轻量级推理
    Serving：云服务部署
             `}
             </MessageText>
@@ -225,14 +230,16 @@ MindSpore 生态系统包含：
           <div>
             <MessageText>
               {`
-MindSpore 提供多种途径获取帮助：
+获取帮助的途径：
 1. **官方支持**
-包括 [MindSpore 官方论坛](https://www.mindspore.cn/community)、GitHub Issues 和官方文档中心。
+   [MindSpore 官方论坛](https://www.mindspore.cn/community)
+   GitHub Issues
 2. **社区交流**
-提供开发者社区、技术交流群和线上线下活动。
+   开发者社区
+   技术交流群
 3. **学习资源**
-包含视频教程、技术博客和在线课程。
-您可以根据问题类型选择最适合的渠道：开发问题优先查看官方文档和 GitHub Issues，使用咨询可以在官方论坛发帖，技术交流请加入开发者社区。
+   视频教程
+   技术博客
 现在，您可以开始创建工作区，开启您的 MindSpore 学习之旅！
             `}
             </MessageText>

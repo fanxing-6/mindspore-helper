@@ -30,7 +30,8 @@
         "showReuseMessage": true,
         "clear": false
       },
-      "label": "Collector: run"
+      "label": "Collector: run",
+      "problemMatcher": []
     },
     {
       "type": "shell",
@@ -88,7 +89,8 @@
         "showReuseMessage": true,
         "clear": false
       },
-      "label": "Frontend: run"
+      "label": "Frontend: run",
+      "problemMatcher": []
     }
   ]
 }
