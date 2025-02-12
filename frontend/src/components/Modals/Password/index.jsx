@@ -26,22 +26,22 @@ export default function PasswordModal({ mode = "single" }) {
         }}
         className="absolute left-0 top-0 z-0 h-full w-full"
       />
-      <div className="hidden md:flex md:w-1/2 md:h-full md:items-center md:justify-center">
+      {/* <div className="hidden md:flex md:w-1/2 md:h-full md:items-center md:justify-center">
         <img
           className="w-full h-full object-contain z-50"
           src={illustration}
           alt="login illustration"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col items-center justify-center h-full w-full md:w-1/2 z-50 relative md:-mt-20 mt-0 !border-none bg-theme-bg-secondary md:bg-transparent">
-        <img
+        {/* <img
           src={loginLogo}
           alt="Logo"
           className={`hidden relative md:flex rounded-2xl w-fit m-4 z-30 ${
             mode === "single" ? "md:top-2" : "md:top-12"
           } absolute max-h-[65px]`}
           style={{ objectFit: "contain" }}
-        />
+        /> */}
         {mode === "single" ? <SingleUserAuth /> : <MultiUserAuth />}
       </div>
     </div>

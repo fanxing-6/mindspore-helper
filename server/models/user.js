@@ -87,7 +87,8 @@ const User = {
       // Do not allow new users to bypass validation
       if (!this.usernameRegex.test(username))
         throw new Error(
-          "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces"
+          // "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces"
+          "用户名只能包含小写字母、数字、下划线和连字符，不能包含空格"
         );
 
       const bcrypt = require("bcrypt");
@@ -166,7 +167,7 @@ const User = {
         return {
           success: false,
           error:
-            "Username must only contain lowercase letters, numbers, underscores, and hyphens with no spaces",
+            "用户名只能包含小写字母、数字、下划线和连字符，不能包含空格",
         };
 
       const user = await prisma.users.update({

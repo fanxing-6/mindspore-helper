@@ -37,10 +37,19 @@ const { purgeDocument } = require("../utils/files/purgeDocument");
 const prisma = require("../utils/prisma");
 const { log } = require("console");
 
+// 检查用户是否是工作区的所有者或管理员
+async function isWorkspaceOwnerOrAdmin(workspace, user) {
+  if (!user) return false;
+  if (user.role === ROLES.admin) return true;
+  if (user.role === ROLES.manager) {
+    return workspace.user_id === user.id;
+  }
+  return false;
+}
+
 function workspaceEndpoints(app) {
   if (!app) return;
   const responseCache = new Map();
-
 
 
   app.post(
@@ -55,31 +64,6 @@ function workspaceEndpoints(app) {
         const { name = null, onboardingComplete = false } = reqBody(request);
         const { workspace, message } = await Workspace.new(name, user?.id);
         await Workspace.updateUsers(workspace.id, [user?.id]);
-
-        // 查找任意一个已存在的workspace的documents
-        const existingWorkspace = await Workspace.where(
-          {
-            id: { not: workspace.id }, // 排除刚创建的workspace
-          },
-          1
-        ); // 只获取一个workspace即可
-
-        if (existingWorkspace && existingWorkspace.length > 0) {
-          const docs = await Document.where({
-            workspaceId: existingWorkspace[0].id,
-          });
-          if (docs.length > 0) {
-            const docPaths = docs.map((doc) => doc.docpath);
-            const { failedToEmbed = [], errors = [] } =
-              await Document.addDocuments(workspace, docPaths, user?.id);
-
-            if (failedToEmbed.length > 0) {
-              console.warn(
-                `同步文档时失败: ${failedToEmbed.length} 个文档未能同步。\n错误: ${errors.join("\n")}`
-              );
-            }
-          }
-        }
 
         await Telemetry.sendTelemetry(
           "workspace_created",
@@ -100,7 +84,6 @@ function workspaceEndpoints(app) {
           },
           user?.id
         );
-
         if (onboardingComplete === true)
           await Telemetry.sendTelemetry("onboarding_complete");
 
@@ -111,48 +94,6 @@ function workspaceEndpoints(app) {
       }
     }
   );
-  // app.post(
-  //   "/workspace/new",
-  //   [
-  //     validatedRequest,
-  //     flexUserRoleValid([ROLES.default, ROLES.admin, ROLES.manager]),
-  //   ],
-  //   async (request, response) => {
-  //     try {
-  //       const user = await userFromSession(request, response);
-  //       const { name = null, onboardingComplete = false } = reqBody(request);
-  //       const { workspace, message } = await Workspace.new(name, user?.id);
-  //       await Workspace.updateUsers(workspace.id, [user?.id]);
-
-  //       await Telemetry.sendTelemetry(
-  //         "workspace_created",
-  //         {
-  //           multiUserMode: multiUserMode(response),
-  //           LLMSelection: process.env.LLM_PROVIDER || "openai",
-  //           Embedder: process.env.EMBEDDING_ENGINE || "inherit",
-  //           VectorDbSelection: process.env.VECTOR_DB || "lancedb",
-  //           TTSSelection: process.env.TTS_PROVIDER || "native",
-  //         },
-  //         user?.id
-  //       );
-
-  //       await EventLogs.logEvent(
-  //         "workspace_created",
-  //         {
-  //           workspaceName: workspace?.name || "Unknown Workspace",
-  //         },
-  //         user?.id
-  //       );
-  //       if (onboardingComplete === true)
-  //         await Telemetry.sendTelemetry("onboarding_complete");
-
-  //       response.status(200).json({ workspace, message });
-  //     } catch (e) {
-  //       console.error(e.message, e);
-  //       response.sendStatus(500).end();
-  //     }
-  //   }
-  // );
 
   app.post(
     "/workspace/:slug/update",
@@ -184,12 +125,24 @@ function workspaceEndpoints(app) {
               ].includes(key)
             )
           );
+        } else if (
+          user?.role === ROLES.manager &&
+          !(await isWorkspaceOwnerOrAdmin(currWorkspace, user))
+        ) {
+          response
+            .status(403)
+            .json({
+              success: false,
+              error: "您没有权限更新此工作区的所有设置",
+            })
+            .end();
+          return;
         }
 
         await Workspace.trackChange(currWorkspace, filteredData, user);
         const { workspace, message } = await Workspace.update(
           currWorkspace.id,
-          data
+          filteredData
         );
         response.status(200).json({ workspace, message });
       } catch (e) {
@@ -208,6 +161,21 @@ function workspaceEndpoints(app) {
     ],
     async function (request, response) {
       try {
+        const user = await userFromSession(request, response);
+        const { slug } = request.params;
+        const workspace = await Workspace.get({ slug });
+
+        if (!workspace || !(await isWorkspaceOwnerOrAdmin(workspace, user))) {
+          response
+            .status(403)
+            .json({
+              success: false,
+              error: "您没有权限在此工作区上传文件",
+            })
+            .end();
+          return;
+        }
+
         const Collector = new CollectorApi();
         const { originalname } = request.file;
         const processingOnline = await Collector.online();
@@ -217,7 +185,7 @@ function workspaceEndpoints(app) {
             .status(500)
             .json({
               success: false,
-              error: `Document processing API is not online. Document ${originalname} will not be processed automatically.`,
+              error: `文档处理API离线。文档 ${originalname} 将无法自动处理。`,
             })
             .end();
           return;
@@ -301,27 +269,27 @@ function workspaceEndpoints(app) {
         const { slug = null } = request.params;
         const { adds = [], deletes = [] } = reqBody(request);
         const syncToAll = true;
-        // 是否同步到所有工作区
-        if (syncToAll) {
-          const syncResults = await syncAllWorkspaces(
-            adds,
-            deletes,
-            response.locals?.user?.id
-          );
-          return response.status(200).json({
-            success: syncResults.failures.length === 0,
-            results: {
-              successfulWorkspaces: syncResults.successes,
-              failedWorkspaces: syncResults.failures,
-              errors: Array.from(syncResults.errors),
-            },
-            message:
-              syncResults.failures.length > 0
-                ? `同步失败的工作区: ${syncResults.failures.length}个。详细错误信息请查看结果。`
-                : "所有工作区同步成功",
-          });
-        }
-        //++++++++++++++++++++++
+        // // 是否同步到所有工作区
+        // if (syncToAll) {
+        //   const syncResults = await syncAllWorkspaces(
+        //     adds,
+        //     deletes,
+        //     response.locals?.user?.id
+        //   );
+        //   return response.status(200).json({
+        //     success: syncResults.failures.length === 0,
+        //     results: {
+        //       successfulWorkspaces: syncResults.successes,
+        //       failedWorkspaces: syncResults.failures,
+        //       errors: Array.from(syncResults.errors),
+        //     },
+        //     message:
+        //       syncResults.failures.length > 0
+        //         ? `同步失败的工作区: ${syncResults.failures.length}个。详细错误信息请查看结果。`
+        //         : "所有工作区同步成功",
+        //   });
+        // }
+        // //++++++++++++++++++++++
         // 同步到单个工作区
         const currWorkspace = multiUserMode(response)
           ? await Workspace.getWithUser(user, { slug })
@@ -417,6 +385,17 @@ function workspaceEndpoints(app) {
           return;
         }
 
+        if (!(await isWorkspaceOwnerOrAdmin(workspace, user))) {
+          response
+            .status(403)
+            .json({
+              success: false,
+              error: "您没有权限删除此工作区",
+            })
+            .end();
+          return;
+        }
+
         await WorkspaceChats.delete({ workspaceId: Number(workspace.id) });
         await DocumentVectors.deleteForWorkspace(workspace.id);
         await Document.delete({ workspaceId: Number(workspace.id) });
@@ -490,7 +469,7 @@ function workspaceEndpoints(app) {
     async (request, response) => {
       try {
         const user = await userFromSession(request, response);
-        const workspaces = multiUserMode(response)
+        let workspaces = multiUserMode(response)
           ? await Workspace.whereWithUser(user)
           : await Workspace.where();
 
@@ -610,7 +589,7 @@ function workspaceEndpoints(app) {
       try {
         const { chatId, newText = null } = reqBody(request);
         if (!newText || !String(newText).trim())
-          throw new Error("Cannot save empty response");
+          throw new Error("无法保存空响应");
 
         const user = await userFromSession(request, response);
         const workspace = response.locals.workspace;
@@ -620,7 +599,7 @@ function workspaceEndpoints(app) {
           user_id: user?.id,
           id: Number(chatId),
         });
-        if (!existingChat) throw new Error("Invalid chat.");
+        if (!existingChat) throw new Error("无效的聊天记录");
 
         const chatResponse = safeJsonParse(existingChat.response, null);
         if (!chatResponse) throw new Error("Failed to parse chat response");
@@ -697,14 +676,14 @@ function workspaceEndpoints(app) {
         if (!Array.isArray(messages)) {
           return response.status(400).json({
             success: false,
-            message: "Invalid message format. Expected an array of messages.",
+            message: "无效的消息格式。需要消息数组。",
           });
         }
 
         await WorkspaceSuggestedMessages.saveAll(messages, slug);
         return response.status(200).json({
           success: true,
-          message: "Suggested messages saved successfully.",
+          message: "建议消息保存成功。",
         });
       } catch (error) {
         console.error("Error processing the suggested messages:", error);
@@ -779,8 +758,8 @@ function workspaceEndpoints(app) {
         response.end(buffer);
         return;
       } catch (error) {
-        console.error("Error processing the TTS request:", error);
-        response.status(500).json({ message: "TTS could not be completed" });
+        console.error("处理TTS请求时出错:", error);
+        response.status(500).json({ message: "TTS处理失败" });
       }
     }
   );
@@ -822,8 +801,8 @@ function workspaceEndpoints(app) {
         response.end(buffer);
         return;
       } catch (error) {
-        console.error("Error processing the logo request:", error);
-        response.status(500).json({ message: "Internal server error" });
+        console.error("处理头像上传时出错:", error);
+        response.status(500).json({ message: "内部服务器错误" });
       }
     }
   );
@@ -935,7 +914,7 @@ function workspaceEndpoints(app) {
 
         // Get threadId we are branching from if that request body is sent
         // and is a valid thread slug.
-        const threadId = !!threadSlug
+        const threadId = threadSlug
           ? (
               await WorkspaceThread.get({
                 slug: String(threadSlug),
@@ -1053,7 +1032,7 @@ function workspaceEndpoints(app) {
             .status(500)
             .json({
               success: false,
-              error: `Document processing API is not online. Document ${originalname} will not be processed automatically.`,
+              error: `文档处理API离线。文档 ${originalname} 将无法自动处理。`,
             })
             .end();
           return;

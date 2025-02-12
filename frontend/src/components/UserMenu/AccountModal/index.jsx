@@ -68,7 +68,7 @@ export default function AccountModal({ user, hideModal }) {
         <div className="relative p-6 border-b rounded-t border-theme-modal-border">
           <div className="w-full flex gap-x-2 items-center">
             <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-              Edit Account
+              编辑账户
             </h3>
           </div>
           <button
@@ -104,7 +104,7 @@ export default function AccountModal({ user, hideModal }) {
                     <div className="flex flex-col items-center justify-center p-3">
                       <Plus className="w-8 h-8 text-theme-text-secondary m-2" />
                       <span className="text-theme-text-secondary text-opacity-80 text-sm font-semibold">
-                        Profile Picture
+                        头像
                       </span>
                       <span className="text-theme-text-secondary text-opacity-60 text-xs">
                         800 x 800
@@ -118,7 +118,7 @@ export default function AccountModal({ user, hideModal }) {
                     onClick={handleRemovePfp}
                     className="mt-3 text-theme-text-secondary text-opacity-60 text-sm font-medium hover:underline"
                   >
-                    Remove Profile Picture
+                    删除头像
                   </button>
                 )}
               </div>
@@ -129,21 +129,20 @@ export default function AccountModal({ user, hideModal }) {
                   htmlFor="username"
                   className="block mb-2 text-sm font-medium text-theme-text-primary"
                 >
-                  Username
+                  用户名
                 </label>
                 <input
                   name="username"
                   type="text"
                   className="border-none bg-theme-settings-input-bg placeholder:text-theme-settings-input-placeholder border-gray-500 text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder="User's username"
+                  placeholder="用户名"
                   minLength={2}
                   defaultValue={user.username}
                   required
                   autoComplete="off"
                 />
                 <p className="mt-2 text-xs text-white/60">
-                  Username must be only contain lowercase letters, numbers,
-                  underscores, and hyphens with no spaces
+                  用户名只能包含小写字母、数字、下划线和连字符，不能包含空格
                 </p>
               </div>
               <div>
@@ -151,17 +150,17 @@ export default function AccountModal({ user, hideModal }) {
                   htmlFor="password"
                   className="block mb-2 text-sm font-medium text-white"
                 >
-                  New Password
+                  新密码
                 </label>
                 <input
                   name="password"
                   type="text"
                   className="border-none bg-theme-settings-input-bg placeholder:text-theme-settings-input-placeholder border-gray-500 text-white text-sm rounded-lg focus:outline-primary-button active:outline-primary-button outline-none block w-full p-2.5"
-                  placeholder={`${user.username}'s new password`}
+                  placeholder={`${user.username}的新密码`}
                   minLength={8}
                 />
                 <p className="mt-2 text-xs text-white/60">
-                  Password must be at least 8 characters long
+                  密码必须至少8个字符
                 </p>
               </div>
               <div className="flex flex-row gap-x-8">
@@ -175,13 +174,13 @@ export default function AccountModal({ user, hideModal }) {
                 type="button"
                 className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
               >
-                Cancel
+                  取消
               </button>
               <button
                 type="submit"
                 className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
               >
-                Update Account
+                更新账户
               </button>
             </div>
           </form>
@@ -205,7 +204,7 @@ function LanguagePreference() {
         htmlFor="userLang"
         className="block mb-2 text-sm font-medium text-white"
       >
-        Preferred language
+        首选语言
       </label>
       <select
         name="userLang"
@@ -234,7 +233,7 @@ function ThemePreference() {
         htmlFor="theme"
         className="block mb-2 text-sm font-medium text-white"
       >
-        Theme Preference
+        主题偏好
       </label>
       <select
         name="theme"
