@@ -68,7 +68,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "openai",
     logo: OpenAiLogo,
     options: (settings) => <OpenAiOptions settings={settings} />,
-    description: "The standard option for most non-commercial use.",
+    // description: "The standard option for most non-commercial use.",
+    description: "最常用的非商业用途选项。",
     requiredConfig: ["OpenAiKey"],
   },
   {
@@ -84,7 +85,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "anthropic",
     logo: AnthropicLogo,
     options: (settings) => <AnthropicAiOptions settings={settings} />,
-    description: "A friendly AI Assistant hosted by Anthropic.",
+    // description: "A friendly AI Assistant hosted by Anthropic.",
+    description: "一个由 Anthropic 托管的友好 AI 助手。",
     requiredConfig: ["AnthropicApiKey"],
   },
   {
@@ -92,7 +94,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "gemini",
     logo: GeminiLogo,
     options: (settings) => <GeminiLLMOptions settings={settings} />,
-    description: "Google's largest and most capable AI model",
+    // description: "Google's largest and most capable AI model",
+    description: "Google 最大的 AI 模型",
     requiredConfig: ["GeminiLLMApiKey"],
   },
   {
@@ -100,8 +103,9 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "nvidia-nim",
     logo: NvidiaNimLogo,
     options: (settings) => <NvidiaNimOptions settings={settings} />,
-    description:
-      "Run full parameter LLMs directly on your NVIDIA RTX GPU using NVIDIA NIM.",
+    // description:
+    //   "Run full parameter LLMs directly on your NVIDIA RTX GPU using NVIDIA NIM.",
+    description: "直接在 NVIDIA RTX GPU 上运行完整的参数 LLM 使用 NVIDIA NIM。",
     requiredConfig: ["NvidiaNimLLMBasePath"],
   },
   {
@@ -109,8 +113,10 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "huggingface",
     logo: HuggingFaceLogo,
     options: (settings) => <HuggingFaceOptions settings={settings} />,
+    // description:
+    //   "Access 150,000+ open-source LLMs and the world's AI community",
     description:
-      "Access 150,000+ open-source LLMs and the world's AI community",
+      "访问 150,000+ 开源 LLM 和全球 AI 社区",
     requiredConfig: [
       "HuggingFaceLLMEndpoint",
       "HuggingFaceLLMAccessToken",
@@ -122,7 +128,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "ollama",
     logo: OllamaLogo,
     options: (settings) => <OllamaLLMOptions settings={settings} />,
-    description: "Run LLMs locally on your own machine.",
+    // description: "Run LLMs locally on your own machine.",
+    description: "在本地机器上运行 LLM。",
     requiredConfig: ["OllamaLLMBasePath"],
   },
   {
@@ -130,8 +137,10 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "novita",
     logo: NovitaLogo,
     options: (settings) => <NovitaLLMOptions settings={settings} />,
+    // description:
+    //   "Reliable, Scalable, and Cost-Effective for LLMs from Novita AI",
     description:
-      "Reliable, Scalable, and Cost-Effective for LLMs from Novita AI",
+      "可靠、可扩展且成本效益高的 LLM 来自 Novita AI",
     requiredConfig: ["NovitaLLMApiKey"],
   },
   {
@@ -139,8 +148,10 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "lmstudio",
     logo: LMStudioLogo,
     options: (settings) => <LMStudioOptions settings={settings} />,
+    // description:
+    //   "Discover, download, and run thousands of cutting edge LLMs in a few clicks.",
     description:
-      "Discover, download, and run thousands of cutting edge LLMs in a few clicks.",
+      "发现、下载和在几秒钟内运行数千个尖端 LLM。",
     requiredConfig: ["LMStudioBasePath"],
   },
   {
@@ -148,7 +159,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "localai",
     logo: LocalAiLogo,
     options: (settings) => <LocalAiOptions settings={settings} />,
-    description: "Run LLMs locally on your own machine.",
+    // description: "Run LLMs locally on your own machine.",
+    description: "在本地机器上运行 LLM。",
     requiredConfig: ["LocalAiApiKey", "LocalAiBasePath", "LocalAiTokenLimit"],
   },
   {
@@ -156,7 +168,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "togetherai",
     logo: TogetherAILogo,
     options: (settings) => <TogetherAiOptions settings={settings} />,
-    description: "Run open source models from Together AI.",
+    // description: "Run open source models from Together AI.",
+    description: "从 Together AI 运行开源模型。",
     requiredConfig: ["TogetherAiApiKey"],
   },
   {
@@ -173,7 +186,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "mistral",
     logo: MistralLogo,
     options: (settings) => <MistralOptions settings={settings} />,
-    description: "Run open source models from Mistral AI.",
+    // description: "Run open source models from Mistral AI.",
+    description: "从 Mistral AI 运行开源模型。",
     requiredConfig: ["MistralApiKey"],
   },
   {
@@ -190,7 +204,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "openrouter",
     logo: OpenRouterLogo,
     options: (settings) => <OpenRouterOptions settings={settings} />,
-    description: "A unified interface for LLMs.",
+    // description: "A unified interface for LLMs.",
+    description: "一个用于 LLM 的统一接口。",
     requiredConfig: ["OpenRouterApiKey"],
   },
   {
@@ -198,8 +213,10 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "groq",
     logo: GroqLogo,
     options: (settings) => <GroqAiOptions settings={settings} />,
+    // description:
+    //   "The fastest LLM inferencing available for real-time AI applications.",
     description:
-      "The fastest LLM inferencing available for real-time AI applications.",
+      "最快的 LLM 推理，适用于实时 AI 应用程序。",
     requiredConfig: ["GroqApiKey"],
   },
   {
@@ -207,7 +224,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "koboldcpp",
     logo: KoboldCPPLogo,
     options: (settings) => <KoboldCPPOptions settings={settings} />,
-    description: "Run local LLMs using koboldcpp.",
+    // description: "Run local LLMs using koboldcpp.",
+    description: "使用 koboldcpp 运行本地 LLM。",
     requiredConfig: [
       "KoboldCPPModelPref",
       "KoboldCPPBasePath",
@@ -219,7 +237,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "textgenwebui",
     logo: TextGenWebUILogo,
     options: (settings) => <TextGenWebUIOptions settings={settings} />,
-    description: "Run local LLMs using Oobabooga's Text Generation Web UI.",
+    // description: "Run local LLMs using Oobabooga's Text Generation Web UI.",
+    description: "使用 Oobabooga 的文本生成 Web UI 运行本地 LLM。",
     requiredConfig: ["TextGenWebUIBasePath", "TextGenWebUITokenLimit"],
   },
   {
@@ -227,7 +246,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "cohere",
     logo: CohereLogo,
     options: (settings) => <CohereAiOptions settings={settings} />,
-    description: "Run Cohere's powerful Command models.",
+    // description: "Run Cohere's powerful Command models.",
+    description: "运行 Cohere 的强大命令模型。",
     requiredConfig: ["CohereApiKey"],
   },
   {
@@ -235,7 +255,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "litellm",
     logo: LiteLLMLogo,
     options: (settings) => <LiteLLMOptions settings={settings} />,
-    description: "Run LiteLLM's OpenAI compatible proxy for various LLMs.",
+    // description: "Run LiteLLM's OpenAI compatible proxy for various LLMs.",
+    description: "使用 LiteLLM 运行各种 LLM 的 OpenAI 兼容代理。",
     requiredConfig: ["LiteLLMBasePath"],
   },
   {
@@ -243,7 +264,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "deepseek",
     logo: DeepSeekLogo,
     options: (settings) => <DeepSeekOptions settings={settings} />,
-    description: "Run DeepSeek's powerful LLMs.",
+    // description: "Run DeepSeek's powerful LLMs.",
+    description: "运行 DeepSeek 的强大 LLM。",
     requiredConfig: ["DeepSeekApiKey"],
   },
   {
@@ -251,7 +273,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "bedrock",
     logo: AWSBedrockLogo,
     options: (settings) => <AWSBedrockLLMOptions settings={settings} />,
-    description: "Run powerful foundation models privately with AWS Bedrock.",
+    // description: "Run powerful foundation models privately with AWS Bedrock.",
+    description: "使用 AWS Bedrock 运行强大的基础模型。",
     requiredConfig: [
       "AwsBedrockLLMAccessKeyId",
       "AwsBedrockLLMAccessKey",
@@ -264,7 +287,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "apipie",
     logo: APIPieLogo,
     options: (settings) => <ApiPieLLMOptions settings={settings} />,
-    description: "A unified API of AI services from leading providers",
+    // description: "A unified API of AI services from leading providers",
+    description: "一个来自领先提供商的 AI 服务的统一 API",
     requiredConfig: ["ApipieLLMApiKey", "ApipieLLMModelPref"],
   },
   {
@@ -272,8 +296,9 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "generic-openai",
     logo: GenericOpenAiLogo,
     options: (settings) => <GenericOpenAiOptions settings={settings} />,
-    description:
-      "Connect to any OpenAi-compatible service via a custom configuration",
+    // description:
+    //   "Connect to any OpenAi-compatible service via a custom configuration",
+    description: "通过自定义配置连接到任何 OpenAI 兼容的服务",
     requiredConfig: [
       "GenericOpenAiBasePath",
       "GenericOpenAiModelPref",
@@ -286,7 +311,8 @@ export const AVAILABLE_LLM_PROVIDERS = [
     value: "xai",
     logo: XAILogo,
     options: (settings) => <XAILLMOptions settings={settings} />,
-    description: "Run xAI's powerful LLMs like Grok-2 and more.",
+    // description: "Run xAI's powerful LLMs like Grok-2 and more.",
+    description: "运行 xAI 的强大 LLM 像 Grok-2 和更多。",
     requiredConfig: ["XAIApiKey", "XAIModelPref"],
   },
 ];

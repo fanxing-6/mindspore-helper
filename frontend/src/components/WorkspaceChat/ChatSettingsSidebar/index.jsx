@@ -8,7 +8,7 @@ import ChatHistorySettings from "@/pages/WorkspaceSettings/ChatSettings/ChatHist
 import ChatPromptSettings from "@/pages/WorkspaceSettings/ChatSettings/ChatPromptSettings";
 import ChatTemperatureSettings from "@/pages/WorkspaceSettings/ChatSettings/ChatTemperatureSettings";
 import ChatModeSelection from "@/pages/WorkspaceSettings/ChatSettings/ChatModeSelection";
-
+import WorkspaceLLMSelection from "@/pages/WorkspaceSettings/ChatSettings/WorkspaceLLMSelection";
 export default function ChatSettingsSidebar() {
   const [isOpen, setIsOpen] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -34,6 +34,11 @@ export default function ChatSettingsSidebar() {
         setLoading(false);
       }
     }
+    async function fetchSettings() {
+      const _settings = await System.keys();
+      setSettings(_settings ?? {});
+    }
+    fetchSettings();
     getWorkspaces();
   }, [slug]);
 
@@ -69,7 +74,7 @@ export default function ChatSettingsSidebar() {
           className={`top-0 right-0 h-full flex flex-col shrink-0
           transition-all duration-500 ease-in-out my-[18px]
           rounded-[16px] bg-theme-bg-sidebar border-[2px] border-theme-sidebar-border
-          ${isOpen ? "w-80 opacity-100" : "w-0 opacity-0 translate-x-full"}`}
+          ${isOpen ? "w-96 opacity-100" : "w-0 opacity-0 translate-x-full"}`}
         >
           {isOpen && (
             <>
@@ -94,6 +99,11 @@ export default function ChatSettingsSidebar() {
                       id="chat-settings-form"
                       className="w-full flex flex-col gap-y-6"
                     >
+                      <WorkspaceLLMSelection
+                        settings={settings}
+                        workspace={activeWorkspace}
+                        setHasChanges={setHasChanges}
+                      />
                       <ChatModeSelection
                         workspace={activeWorkspace}
                         setHasChanges={setHasChanges}

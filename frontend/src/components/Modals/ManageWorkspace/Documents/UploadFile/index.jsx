@@ -21,7 +21,7 @@ export default function UploadFile({
   const handleSendLink = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setLoadingMessage("Scraping link...");
+    setLoadingMessage("正在抓取链接...");
     setFetchingUrl(true);
     const formEl = e.target;
     const form = new FormData(formEl);
@@ -30,10 +30,10 @@ export default function UploadFile({
       form.get("link")
     );
     if (!response.ok) {
-      showToast(`Error uploading link: ${data.error}`, "error");
+      showToast(`上传链接失败: ${data.error}`, "error");
     } else {
       fetchKeys(true);
-      showToast("Link uploaded successfully", "success");
+      showToast("链接上传成功", "success");
       formEl.reset();
     }
     setLoading(false);
@@ -92,21 +92,21 @@ export default function UploadFile({
           <div className="flex flex-col items-center justify-center h-full">
             <CloudArrowUp className="w-8 h-8 text-white/80 light:invert" />
             <div className="text-white text-opacity-80 text-sm font-semibold py-1">
-              Document Processor Unavailable
+              文档处理器不可用
             </div>
             <div className="text-white text-opacity-60 text-xs font-medium py-1 px-20 text-center">
-              We can't upload your files right now because the document
-              processor is offline. Please try again later.
+              我们无法上传您的文件，因为文档处理器已离线。请稍后再试。
             </div>
           </div>
         ) : files.length === 0 ? (
           <div className="flex flex-col items-center justify-center">
             <CloudArrowUp className="w-8 h-8 text-white/80 light:invert" />
             <div className="text-white text-opacity-80 text-sm font-semibold py-1">
-              Click to upload or drag and drop
+              点击上传或拖放
             </div>
             <div className="text-white text-opacity-60 text-xs font-medium py-1">
-              supports text files, csv's, spreadsheets, audio files, and more!
+              {/* supports text files, csv's, spreadsheets, audio files, and more! */}
+              支持文本文件、csv、电子表格、音频文件等！
             </div>
           </div>
         ) : (
@@ -130,7 +130,7 @@ export default function UploadFile({
         )}
       </div>
       <div className="text-center text-white text-opacity-50 text-xs font-medium w-[560px] py-2">
-        or submit a link
+        或提交一个链接
       </div>
       <form onSubmit={handleSendLink} className="flex gap-x-2">
         <input
@@ -146,13 +146,11 @@ export default function UploadFile({
           type="submit"
           className="disabled:bg-white/20 disabled:text-slate-300 disabled:border-slate-400 disabled:cursor-wait bg bg-transparent hover:bg-slate-200 hover:text-slate-800 w-auto border border-white light:border-theme-modal-border text-sm text-white p-2.5 rounded-lg"
         >
-          {fetchingUrl ? "Fetching..." : "Fetch website"}
+          {fetchingUrl ? "正在抓取..." : "抓取网站"}
         </button>
       </form>
       <div className="mt-6 text-center text-white text-opacity-80 text-xs font-medium w-[560px]">
-        These files will be uploaded to the document processor running on this
-        AnythingLLM instance. These files are not sent or shared with a third
-        party.
+        这些文件将上传到运行此实例的文档处理器。这些文件不会发送或与第三方共享。
       </div>
     </div>
   );

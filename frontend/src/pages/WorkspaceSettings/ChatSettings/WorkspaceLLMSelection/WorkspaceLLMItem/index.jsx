@@ -138,7 +138,7 @@ function SetupProvider({
           <div className="relative p-6 border-b rounded-t border-theme-modal-border">
             <div className="w-full flex gap-x-2 items-center">
               <h3 className="text-xl font-semibold text-white overflow-hidden overflow-ellipsis whitespace-nowrap">
-                {LLMOption.name} Settings
+                {LLMOption.name} 设置
               </h3>
             </div>
             <button
@@ -153,8 +153,9 @@ function SetupProvider({
             <div className="px-7 py-6">
               <div className="space-y-6 max-h-[60vh] overflow-y-auto p-1">
                 <p className="text-sm text-white/60">
-                  To use {LLMOption.name} as this workspace's LLM you need to
-                  set it up first.
+                  {/* To use {LLMOption.name} as this workspace's LLM you need to
+                  set it up first. */}
+                  请先设置 {LLMOption.name} 作为此工作区的 LLM。
                 </p>
                 <div>
                   {LLMOption.options(settings, { credentialsOnly: true })}
@@ -167,20 +168,21 @@ function SetupProvider({
                 onClick={closeModal}
                 className="transition-all duration-300 text-white hover:bg-zinc-700 px-4 py-2 rounded-lg text-sm"
               >
-                Cancel
+                取消
               </button>
               <button
                 type="submit"
                 form="provider-form"
                 className="transition-all duration-300 bg-white text-black hover:opacity-60 px-4 py-2 rounded-lg text-sm"
               >
-                Save settings
+                保存设置
               </button>
             </div>
           </form>
         </div>
       </div>
     </ModalWrapper>,
-    document.getElementById("workspace-chat-settings-container")
+    // document.getElementById("workspace-chat-settings-container")
+    document.body
   );
 }

@@ -45,18 +45,18 @@ export default function AgentModelSelection({
     return (
       <div className="w-full h-10 justify-center items-center flex">
         <p className="text-sm font-base text-white text-opacity-60 text-center">
-          Multi-model support is not supported for this provider yet.
+          此提供商不支持多模型。
           <br />
-          Agent's will use{" "}
+          代理将使用
           <Link
             to={paths.workspace.settings.chatSettings(slug)}
             className="underline"
           >
-            the model set for the workspace
+            工作区设置的模型
           </Link>{" "}
-          or{" "}
+          或
           <Link to={paths.settings.llmPreference()} className="underline">
-            the model set for the system.
+            系统设置的模型。
           </Link>
         </p>
       </div>
@@ -70,9 +70,9 @@ export default function AgentModelSelection({
           <label htmlFor="name" className="block input-label">
             {t("agent.mode.chat.title")}
           </label>
-          <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
+          {/* <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
             {t("agent.mode.chat.description")}
-          </p>
+          </p> */}
         </div>
         <select
           name="agentModel"
@@ -94,9 +94,9 @@ export default function AgentModelSelection({
         <label htmlFor="name" className="block input-label">
           {t("agent.mode.title")}
         </label>
-        <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
+        {/* <p className="text-white text-opacity-60 text-xs font-medium py-1.5">
           {t("agent.mode.description")}
-        </p>
+        </p> */}
       </div>
 
       <select

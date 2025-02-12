@@ -180,6 +180,7 @@ function workspaceEndpoints(app) {
                 "openAiHistory",
                 "openAiPrompt",
                 "openAiTemp",
+                "llmProvider",
               ].includes(key)
             )
           );

@@ -21,11 +21,11 @@ const NO_MODEL_SELECTION = ["default", "huggingface"];
 const DISABLED_PROVIDERS = [];
 
 const LLM_DEFAULT = {
-  name: "System default",
+  name: "系统默认",
   value: "default",
   logo: AnythingLLMIcon,
   options: () => <React.Fragment />,
-  description: "Use the system LLM preference for this workspace.",
+  description: "使用系统 LLM 偏好设置作为此工作区的 LLM。",
   requiredConfig: [],
 };
 
