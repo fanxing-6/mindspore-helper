@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import CommunityHubImportItemSteps, {
   CommunityHubImportItemLayout,
 } from "./Steps";

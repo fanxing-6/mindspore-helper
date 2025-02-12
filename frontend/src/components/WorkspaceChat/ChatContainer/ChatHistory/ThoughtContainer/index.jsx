@@ -3,7 +3,7 @@ import renderMarkdown from "@/utils/chat/markdown";
 import { Brain, CaretDown } from "@phosphor-icons/react";
 import DOMPurify from "dompurify";
 import truncate from "truncate";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 
 const THOUGHT_KEYWORDS = ["thought", "thinking", "think", "thought_chain"];
 const CLOSING_TAGS = [...THOUGHT_KEYWORDS, "response", "answer"];

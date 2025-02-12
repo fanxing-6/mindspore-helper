@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import Sidebar from "@/components/SettingsSidebar";
 import System from "@/models/system";
 import PreLoader from "@/components/Preloader";

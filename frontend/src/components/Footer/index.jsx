@@ -13,7 +13,7 @@ import {
 } from "@phosphor-icons/react";
 import React, { useEffect, useState } from "react";
 import SettingsButton from "../SettingsButton";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import { Tooltip } from "react-tooltip";
 import { Link } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import Sidebar from "@/components/SettingsSidebar";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import HubItems from "./HubItems";
 
 export default function CommunityHub() {

@@ -4,7 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import { useParams } from "react-router-dom";
 import Workspace from "@/models/workspace";
 import PasswordModal, { usePasswordModal } from "@/components/Modals/Password";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import { FullScreenLoader } from "@/components/Preloader";
 import ChatSettingsSidebar from "@/components/WorkspaceChat/ChatSettingsSidebar";
 export default function WorkspaceChat() {

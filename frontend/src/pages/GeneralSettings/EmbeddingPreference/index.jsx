@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "@/components/SettingsSidebar";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import System from "@/models/system";
 import showToast from "@/utils/toast";
 import AnythingLLMIcon from "@/media/logo/anything-llm-icon.png";

@@ -14,7 +14,7 @@ import {
   Globe,
 } from "@phosphor-icons/react";
 import useUser from "@/hooks/useUser";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";

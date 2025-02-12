@@ -1,5 +1,5 @@
 import { CaretRight } from "@phosphor-icons/react";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "@/hooks/useDevice";
 import { sentenceCase } from "text-case";
 
 export default function ImportedSkillList({
