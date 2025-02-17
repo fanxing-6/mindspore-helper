@@ -196,8 +196,8 @@ const SystemSettings = {
       AuthToken: !!process.env.AUTH_TOKEN,
       JWTSecret: !!process.env.JWT_SECRET,
       StorageDir: process.env.STORAGE_DIR,
-      // MultiUserMode: await this.isMultiUserMode(),
-      MultiUserMode: true,
+      MultiUserMode: await this.isMultiUserMode(),
+      // MultiUserMode: true,
       DisableTelemetry: process.env.DISABLE_TELEMETRY || "false",
 
       // --------------------------------------------------------
