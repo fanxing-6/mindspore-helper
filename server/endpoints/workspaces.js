@@ -42,7 +42,8 @@ async function isWorkspaceOwnerOrAdmin(workspace, user) {
   if (!user) return false;
   if (user.role === ROLES.admin) return true;
   if (user.role === ROLES.manager) {
-    return workspace.user_id === user.id;
+    const userWorkspace = await Workspace.getWithUser(user, { id: workspace.id });
+    return !!userWorkspace;
   }
   return false;
 }
@@ -371,7 +372,6 @@ function workspaceEndpoints(app) {
           response.sendStatus(400).end();
           return;
         }
-
         if (!(await isWorkspaceOwnerOrAdmin(workspace, user))) {
           response
             .status(403)
