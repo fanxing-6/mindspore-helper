@@ -196,7 +196,8 @@ const SystemSettings = {
       AuthToken: !!process.env.AUTH_TOKEN,
       JWTSecret: !!process.env.JWT_SECRET,
       StorageDir: process.env.STORAGE_DIR,
-      MultiUserMode: await this.isMultiUserMode(),
+      // MultiUserMode: await this.isMultiUserMode(),
+      MultiUserMode: true,
       DisableTelemetry: process.env.DISABLE_TELEMETRY || "false",
 
       // --------------------------------------------------------
@@ -282,7 +283,6 @@ const SystemSettings = {
   get: async function (clause = {}) {
     try {
       const setting = await prisma.system_settings.findFirst({ where: clause });
-      console.log("setting", setting);
       return setting || null;
     } catch (error) {
       console.error(error.message);
@@ -369,6 +369,7 @@ const SystemSettings = {
   isMultiUserMode: async function () {
     try {
       const setting = await this.get({ label: "multi_user_mode" });
+      console.log("setting", setting);
       return setting?.value === "true";
     } catch (error) {
       console.error(error.message);
