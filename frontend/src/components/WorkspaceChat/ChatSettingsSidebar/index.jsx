@@ -99,11 +99,11 @@ export default function ChatSettingsSidebar() {
                       id="chat-settings-form"
                       className="w-full flex flex-col gap-y-6"
                     >
-                      <WorkspaceLLMSelection
+                      {/* <WorkspaceLLMSelection
                         settings={settings}
                         workspace={activeWorkspace}
                         setHasChanges={setHasChanges}
-                      />
+                      /> */}
                       <ChatModeSelection
                         workspace={activeWorkspace}
                         setHasChanges={setHasChanges}
