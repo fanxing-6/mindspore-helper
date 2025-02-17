@@ -458,10 +458,11 @@ function systemEndpoints(app) {
 
   app.post(
     "/system/update-env",
-    [validatedRequest, flexUserRoleValid([ROLES.admin])],
+    [validatedRequest, flexUserRoleValid([ROLES.admin,ROLES.manager])],
     async (request, response) => {
       try {
         const body = reqBody(request);
+        console.log("body", body);
         const { newValues, error } = await updateENV(
           body,
           false,

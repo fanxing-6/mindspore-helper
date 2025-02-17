@@ -125,20 +125,7 @@ function workspaceEndpoints(app) {
               ].includes(key)
             )
           );
-        } else if (
-          user?.role === ROLES.manager &&
-          !(await isWorkspaceOwnerOrAdmin(currWorkspace, user))
-        ) {
-          response
-            .status(403)
-            .json({
-              success: false,
-              error: "您没有权限更新此工作区的所有设置",
-            })
-            .end();
-          return;
-        }
-
+        } 
         await Workspace.trackChange(currWorkspace, filteredData, user);
         const { workspace, message } = await Workspace.update(
           currWorkspace.id,
