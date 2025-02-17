@@ -14,7 +14,7 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bookworm",
   "runArgs": [
-    "-p", "3000:3000",
+    "-p", "3000:3000"
   ],
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
@@ -206,5 +206,5 @@
     }
   },
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  "remoteUser": "root"
+  "remoteUser": "root",
 }

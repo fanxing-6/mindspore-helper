@@ -282,6 +282,7 @@ const SystemSettings = {
   get: async function (clause = {}) {
     try {
       const setting = await prisma.system_settings.findFirst({ where: clause });
+      console.log("setting", setting);
       return setting || null;
     } catch (error) {
       console.error(error.message);

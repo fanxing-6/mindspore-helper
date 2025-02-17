@@ -18,12 +18,14 @@ function useIsAuthenticated() {
 
   useEffect(() => {
     const validateSession = async () => {
+      
       const {
         MultiUserMode,
         RequiresAuth,
         LLMProvider = null,
         VectorDB = null,
       } = await System.keys();
+      
 
       setMultiUserMode(MultiUserMode);
 
