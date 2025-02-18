@@ -369,7 +369,7 @@ const SystemSettings = {
   isMultiUserMode: async function () {
     try {
       const setting = await this.get({ label: "multi_user_mode" });
-      console.log("setting", setting);
+      // console.log("setting", setting);
       return setting?.value === "true";
     } catch (error) {
       console.error(error.message);

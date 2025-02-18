@@ -595,6 +595,22 @@ ${this.getHistory({ to: route.to })
     // get the chat completion
     const completion = await provider.complete(messages, functions);
 
+    // 处理 rate limit 错误
+    if (completion.error && completion.errorType === 'rate_limit') {
+      this?.introspect?.(`[rate_limit]: Waiting ${completion.retryAfter}s before retry...`);
+      
+      // 等待指定的时间
+      await new Promise(resolve => setTimeout(resolve, completion.retryAfter * 1000));
+      
+      // 重试请求
+      return await this.handleExecution(
+        provider,
+        messages,
+        functions,
+        byAgent
+      );
+    }
+
     if (completion.functionCall) {
       const { name, arguments: args } = completion.functionCall;
       const fn = this.functions.get(name);

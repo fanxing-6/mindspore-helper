@@ -99,6 +99,21 @@ class GroqProvider extends InheritMultiple([Provider, UnTooled]) {
         cost: 0,
       };
     } catch (error) {
+      // 处理 rate limit 错误
+      if (error.code === 'rate_limit_exceeded') {
+        const retryAfter = error.headers?.['retry-after'] || 60;
+        this.providerLog(`Rate limit exceeded. Waiting ${retryAfter} seconds before retry...`);
+        
+        // 返回特殊错误对象而不是抛出错误
+        return {
+          error: true,
+          retryAfter: parseInt(retryAfter),
+          errorType: 'rate_limit',
+          message: error.error?.message || 'Rate limit exceeded'
+        };
+      }
+      
+      // 其他错误仍然抛出
       throw error;
     }
   }
