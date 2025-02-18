@@ -26,13 +26,16 @@ export default function AdminUsers() {
           <div className="w-full flex flex-col gap-y-1 pb-6 border-white/10 border-b-2">
             <div className="items-center flex gap-x-4">
               <p className="text-lg leading-6 font-bold text-theme-text-primary">
-                Users
+                {/* Users */}
+                用户
               </p>
             </div>
             <p className="text-xs leading-[18px] font-base text-theme-text-secondary">
-              These are all the accounts which have an account on this instance.
+              {/* These are all the accounts which have an account on this instance.
               Removing an account will instantly remove their access to this
-              instance.
+              instance. */}
+              这些是所有在实例上有账户的账户。
+              删除一个账户将立即删除他们的访问权限。
             </p>
           </div>
           <div className="w-full justify-end flex">
@@ -40,7 +43,7 @@ export default function AdminUsers() {
               onClick={openModal}
               className="mt-3 mr-0 mb-4 md:-mb-6 z-10"
             >
-              <UserPlus className="h-4 w-4" weight="bold" /> Add user
+              <UserPlus className="h-4 w-4" weight="bold" /> 添加用户
             </CTAButton>
           </div>
           <div className="overflow-x-auto">
@@ -88,16 +91,20 @@ function UsersContainer() {
       <thead className="text-theme-text-secondary text-xs leading-[18px] font-bold uppercase border-white/10 border-b">
         <tr>
           <th scope="col" className="px-6 py-3 rounded-tl-lg">
-            Username
+            {/* Username */}
+            用户名
           </th>
           <th scope="col" className="px-6 py-3">
-            Role
+            {/* Role */}
+            角色
           </th>
           <th scope="col" className="px-6 py-3">
-            Date Added
+            {/* Date Added */}
+            添加日期
           </th>
           <th scope="col" className="px-6 py-3 rounded-tr-lg">
-            {" "}
+            {/* Delete */}
+            删除
           </th>
         </tr>
       </thead>
