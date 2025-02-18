@@ -10,8 +10,8 @@ export default function AvailableAgentsButton({ showing, setShowAgents }) {
     <div
       id="agent-list-btn"
       data-tooltip-id="tooltip-agent-list-btn"
-      data-tooltip-content="View all available agents you can use for chatting."
-      aria-label="View all available agents you can use for chatting."
+      data-tooltip-content="查看所有可用的代理"
+      aria-label="查看所有可用的代理"
       onClick={() => setShowAgents(!showing)}
       className={`flex justify-center items-center cursor-pointer ${
         showing ? "!opacity-100" : ""

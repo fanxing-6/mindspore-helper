@@ -62,7 +62,7 @@ function XAIModelSelection({ apiKey, settings }) {
     return (
       <div className="flex flex-col w-60">
         <label className="text-theme-text-primary text-sm font-semibold block mb-3">
-          Chat Model Selection
+          聊天模型选择
         </label>
         <select
           name="XAIModelPref"
@@ -70,11 +70,11 @@ function XAIModelSelection({ apiKey, settings }) {
           className="border-none bg-theme-settings-input-bg text-theme-text-primary border-theme-border text-sm rounded-lg block w-full p-2.5"
         >
           <option disabled={true} selected={true}>
-            --loading available models--
+            --加载可用模型中--
           </option>
         </select>
         <p className="text-xs leading-[18px] font-base text-theme-text-primary opacity-60 mt-2">
-          Enter a valid API key to view all available models for your account.
+          输入有效的API密钥以查看所有可用的模型。
         </p>
       </div>
     );

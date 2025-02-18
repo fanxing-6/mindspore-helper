@@ -12,11 +12,12 @@ export default function LanguagePreference() {
     <>
       <div className="flex flex-col gap-y-1 mt-6">
         <h2 className="text-base leading-6 font-bold text-white">
-          Display Language
+          {/* Display Language */}
+          显示语言
         </h2>
         <p className="text-xs leading-[18px] font-base text-white/60">
-          Select the preferred language to render AnythingLLM's UI in, when
-          applicable.
+          {/* Select the preferred language to render AnythingLLM's UI in, when applicable. */}
+          选择首选语言以渲染 AnythingLLM 的 UI。
         </p>
       </div>
       <div className="flex items-center gap-x-4">

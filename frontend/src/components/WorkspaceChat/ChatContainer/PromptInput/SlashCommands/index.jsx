@@ -10,7 +10,7 @@ export default function SlashCommandsButton({ showing, setShowSlashCommand }) {
     <div
       id="slash-cmd-btn"
       data-tooltip-id="tooltip-slash-cmd-btn"
-      data-tooltip-content="View all available slash commands for chatting."
+      data-tooltip-content="查看所有可用的快捷命令"
       onClick={() => setShowSlashCommand(!showing)}
       className={`flex justify-center items-center cursor-pointer ${
         showing ? "!opacity-100" : ""

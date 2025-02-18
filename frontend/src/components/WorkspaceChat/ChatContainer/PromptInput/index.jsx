@@ -272,7 +272,7 @@ export default function PromptInput({
                 }}
                 value={promptInput}
                 className={`border-none cursor-text max-h-[50vh] md:max-h-[350px] md:min-h-[40px] mx-2 md:mx-0 pt-[12px] w-full leading-5 md:text-md text-white bg-transparent placeholder:text-white/60 light:placeholder:text-theme-text-primary resize-none active:outline-none focus:outline-none flex-grow ${textSizeClass}`}
-                placeholder={"Send a message"}
+                placeholder={"发送一条消息"}
               />
               {buttonDisabled ? (
                 <StopGenerationButton />
@@ -283,15 +283,15 @@ export default function PromptInput({
                     type="submit"
                     className="border-none inline-flex justify-center rounded-2xl cursor-pointer opacity-60 hover:opacity-100 light:opacity-100 light:hover:opacity-60 ml-4"
                     data-tooltip-id="send-prompt"
-                    data-tooltip-content="Send prompt message to workspace"
-                    aria-label="Send prompt message to workspace"
+                    data-tooltip-content="发送消息到工作区"
+                    aria-label="发送消息到工作区"
                   >
                     <PaperPlaneRight
                       color="var(--theme-sidebar-footer-icon-fill)"
                       className="w-[22px] h-[22px] pointer-events-none text-theme-text-primary"
                       weight="fill"
                     />
-                    <span className="sr-only">Send message</span>
+                    <span className="sr-only">发送消息</span>
                   </button>
                   <Tooltip
                     id="send-prompt"

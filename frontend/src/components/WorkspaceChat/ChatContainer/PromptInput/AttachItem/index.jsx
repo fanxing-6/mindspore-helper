@@ -15,8 +15,8 @@ export default function AttachItem() {
       <button
         id="attach-item-btn"
         data-tooltip-id="attach-item-btn"
-        data-tooltip-content="Attach a file to this chat"
-        aria-label="Attach a file to this chat"
+        data-tooltip-content="添加文件到对话"
+        aria-label="添加文件到对话"
         type="button"
         onClick={(e) => {
           e?.target?.blur();
